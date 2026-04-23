@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework', # Django REST Framework
     #'django_filters', # Suporte a filtros avançados
     'backend',
+    'drf_yasg',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware", # Deve vir antes do CommonMiddleware
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "amazon.urls"
@@ -76,14 +80,19 @@ WSGI_APPLICATION = "amazon.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
- 'default': {
- 'ENGINE': 'django.db.backends.postgresql',
- 'NAME': 'amazon_db', # Nome do banco de dados
- 'USER': 'seu_usuario', # Usuário do PostgreSQL
- 'PASSWORD': 'sua_senha', # Senha do usuário
- 'HOST': 'localhost', # Endereço do servidor
- 'PORT': '5432', # Porta padrão do PostgreSQL
- }
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    },
+
+    'postgres': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'amazon', # Nome do banco de dados
+    'USER': 'seu_usuario', # Usuário do PostgreSQL
+    'PASSWORD': 'sua_senha', # Senha do usuário
+    'HOST': 'localhost', # Endereço do servidor
+    'PORT': '5432', # Porta padrão do PostgreSQL
+    }
 }
 
 
@@ -123,3 +132,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+CORS_ALLOW_ALL_ORIGINS = True

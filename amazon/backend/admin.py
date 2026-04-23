@@ -3,6 +3,6 @@ from .models import Cliente
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
- list_display = ('nome', 'email', 'telefone', 'data_cadastro')
- search_fields = ('nome', 'email')
- ordering = ('nome',)
+    list_display = ('nome', 'email', 'telefone', 'data_cadastro')
+    search_fields = ('nome', 'email')
+    ordering = ('nome',)
